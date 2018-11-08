@@ -129,8 +129,8 @@ int main(void)
 	};
 	float g_vertex_buffer_data1[] = {	//triangle
 		0.0f,0.5f,0.0f,
-		0.5f,0.0f,0.0f,
-		-0.5f,0.0f,0.0f
+		0.5f,-0.5f,0.0f,
+		-0.5f,-0.5f,0.0f
 	};
 
 	unsigned int indices1[] = {  // note that we start from 0!
@@ -202,16 +202,13 @@ int main(void)
 		if (glfwGetKey(window, GLFW_KEY_2)) {
 			drawStage = 2;
 			glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 		}
 		if (glfwGetKey(window, GLFW_KEY_3)) {
 			drawStage = 3;
 			glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data1), g_vertex_buffer_data1, GL_STATIC_DRAW);
 
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices1), indices, GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices1), indices1, GL_STATIC_DRAW);
 		}
 		if (glfwGetKey(window, GLFW_KEY_4)) {
 			drawStage = 4;

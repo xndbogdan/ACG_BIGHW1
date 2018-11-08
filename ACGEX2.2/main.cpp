@@ -164,9 +164,9 @@ int main(void)
 		0.028f,  0.216f,  0.568f
 	};
 
-	unsigned int indices1[] = {  // note that we start from 0!
-		0, 1, 3,  // first Triangle
-		0, 3, 2,   // second Triangle
+	unsigned int indices1[] = {  
+		0, 1, 3,  
+		0, 3, 2,  
 		0 ,1 ,4,
 		1, 2, 4,
 		2, 3 ,4,
@@ -183,10 +183,10 @@ int main(void)
 	glBindVertexArray(vao);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	GLuint colorbuffer;
 	glGenBuffers(1, &colorbuffer);
@@ -273,24 +273,13 @@ int main(void)
 		}
 		if (glfwGetKey(window, GLFW_KEY_5)) {
 			drawStage = 2;
-			
-			glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
-
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
-
-			
-			
+			glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 		}
 		if (glfwGetKey(window, GLFW_KEY_6)) {
 			drawStage = 3;
-			glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data1), g_vertex_buffer_data1, GL_DYNAMIC_DRAW);
-
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices1), indices, GL_DYNAMIC_DRAW);
-
-			
-			
+			glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data1), g_vertex_buffer_data1, GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices1), indices1, GL_STATIC_DRAW);
 		}
 		if (glfwGetKey(window, GLFW_KEY_GRAVE_ACCENT)) {
 			transform_stage = 0;
@@ -330,7 +319,7 @@ int main(void)
 			model = glm::scale(model, glm::vec3(transform_over_time/5, transform_over_time/5, transform_over_time/5));
 		}
 		else if (transform_stage == 3) {
-			model = glm::rotate(model, transform_over_time/10, glm::vec3(0.0f, 1.0f, 0.0f)); //rotate on y over time
+			model = glm::rotate(model, transform_over_time*50, glm::vec3(0.0f, 1.0f, 0.0f)); //rotate on y over time
 		}
 	
 
@@ -362,7 +351,7 @@ int main(void)
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		}
 		else if (drawStage == 3) {
-			glDrawElements(GL_TRIANGLES, 15, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
 		}
 	} 
 	
